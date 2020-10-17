@@ -15,11 +15,12 @@ pipeline {
                 sh 'tidy -q -e *.html'
             }
         }
-        stage('Security Scan') {
-            steps { 
-                aquaMicroscanner imageName: 'alpine:latest', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
-            }
-        }         
+        // aquaMicroscanner token is missing / no emails sent!
+        // stage('Security Scan') {
+        //     steps { 
+        //         aquaMicroscanner imageName: 'alpine:latest', notCompliesCmd: 'exit 4', onDisallowed: 'fail', outputFormat: 'html'
+        //     }
+        // }         
         stage('Upload to AWS') {
             steps {
                 withAWS(region:'ca-central-1',credentials:'default') {
